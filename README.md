@@ -7,34 +7,28 @@ Master: [![Build Status](https://api.travis-ci.org/zendframework/zf1.png?branch=
 RELEASE INFORMATION
 ===================
 
-Zend Framework 1.12.8 Release.
-Released on August 26, 2014.
+Zend Framework 1.12.9Release.
+Released on September 17, 2014.
 
-IMPORTANT FIXES FOR 1.12.8
+IMPORTANT FIXES FOR 1.12.9
 --------------------------
 
-- [#360](https://github.com/zendframework/zf1/pull/360) Zend_Locale:
-  [CLDR](http://cldr.unicode.org) updated to version 25
-- [#98](https://github.com/zendframework/zf1/pull/98) Allow editing and
-  flattening of text form fields within PDF documents
-- [#375](https://github.com/zendframework/zf1/pull/375) Implement
-  Zend_Pdf::setJavascript(), Zend_Pdf::addJavascript() and
-  Zend_Pdf::resetJavaScript()
-- [#414](https://github.com/zendframework/zf1/pull/414) Adds the
-  `Microsoft_Console` component from the Windows Azure SDK for PHP into
-  the `Zend_Service_Console` component, ensuring that WindowsAzure 
-  command line functionality included in the framework can now work.
-- [#385](https://github.com/zendframework/zf1/pull/385) Adds support for
-  DateTime fractional seconds under PHP 5.6+.
-- [#382](https://github.com/zendframework/zf1/pull/382) Ensures that
-  orphaned metadata cache files are removed when `Zend_Cache::CLEANING_MODE_ALL`
-  is used.
-- [#410](https://github.com/zendframework/zf1/pull/410) Ensures that calls
-  to reset the status of the libxml entity loader happen as soon as possible,
-  to prevent potential threading issues under php-fpm (since the settings
-  are per process, not per-request, in that environment).
+**This release contains security updates:**
 
-See http://framework.zend.com/changelog/1.12.8 for full details.
+- **ZF2014-05:** Due to an issue that existed in PHP's LDAP extension, it is
+  possible to perform an unauthenticated simple bind against a LDAP server by
+  using a null byte for the password, regardless of whether or not the user
+  normally requires a password. We have provided a patch in order to protect
+  users of unpatched PHP versions (PHP 5.5 <= 5.5.11, PHP 5.4 <= 5.4.27, all
+  versions of PHP 5.3 and below). If you use `Zend_Ldap` and are on an affected
+  version of PHP, we recommend upgrading immediately.
+- **ZF2014-06** `Zend_Db_Adapter_Sqlsrv` had a potential SQL injection
+  vulnerability via improperly quoted null bytes. The code has been updated to
+  ensure proper quoting and thus remove the security vector. If you are using
+  `Zend_Db_Adapter_Sqlsrv` and manually quoting values via the adapter, we
+  encourage you to upgrade immediately.
+
+See http://framework.zend.com/changelog for full details.
 
 NEW FEATURES
 ============
